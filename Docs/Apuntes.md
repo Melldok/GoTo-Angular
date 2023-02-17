@@ -66,3 +66,37 @@ Nos ayudan a agrupar componentes y piezas de la aplicación que tienen sentido e
 export class HeroesModule{}
 
 ```
+
+
+
+## Formularios
+
+Con el módulo FormsModule podemos usar directamente funciones como preventDefault de manera automatizada
+
+```html
+<form (ngSubmit)="agregar()">
+    
+    <input type="text" placeholder="Nombre">
+
+    <input type="number" placeholder="Poder"> 
+
+    <button type="submit">
+        Agregar
+    </button>
+
+</form>
+
+```
+
+Two way data binding. El input recibe y envia el valor 
+
+```html
+
+    <input 
+        type="text" 
+        placeholder="Nombre"
+        name="nombre"
+        [(ngModel)]="nuevo.nombre"
+    >
+
+```
