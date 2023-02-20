@@ -100,3 +100,116 @@ Two way data binding. El input recibe y envia el valor
     >
 
 ```
+
+## Envio de data entre componentes :
+
+### De padre a hijo :
+
+Se utiliza el input.  Se envia mediante corchetes. Se puede utilizar con un alias.
+
+```ts
+
+    <app-agregar [nuevo]="nuevo"></app-agregar>
+
+        @Input() nuevo: Personaje = {
+        nombre: '',
+        poder: 0    
+  }
+
+```
+
+### De hijo a padre:
+
+Se utiliza el output. 
+
+```ts
+
+    // En el componente
+
+    @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
+
+    agregar(){
+
+    if(this.nuevo.nombre.trim().length === 0){return}
+
+    console.log(this.nuevo)
+
+    //Emite un nuevo item de tipo personaje (Definido en el Emitter)
+    this.onNuevoPersonaje.emit(this.nuevo)
+    this.nuevo = {nombre: '', poder: 0}
+
+    // Recibiendo en el template ()
+
+        <app-agregar 
+        [nuevo]="nuevo"
+        (onNuevoPersonaje)="agregarNuevoPersonaje($event)"
+        ></app-agregar>
+
+    // Consumiendo en componente padre
+
+        nuevo: Personaje = {
+        nombre: '',
+        poder: 0   
+    }
+
+        agregarNuevoPersonaje(argumento:Personaje){
+            this.personajes.push(argumento)
+        }
+    
+    }
+```
+
+
+## Servicios
+
+Los servicios permiten a Angular trabajar de forma muy completa sin tener que recurrir a librerias de terceros para todo. Basicamente permiten trabajar con patron Redux sin Redux.
+
+
+Se declaran dentro de providers
+
+```ts
+
+
+    @NgModule({
+    declarations: [
+        
+    
+        MainPageComponent,
+                PersonajesComponent,
+                AgregarComponent
+    ],
+    exports: [
+        MainPageComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule
+    ],
+    providers: [
+        DbzService
+    ]
+    })
+    export class DbzModule { }
+
+```
+
+Se crean como injectables : 
+
+```ts
+
+    @Injectable()
+    export class DbzService{
+        constructor(){
+            console.log('Servicio iniciado')
+        }
+    }
+    
+
+    // Inyectar 
+
+
+    constructor(
+        private dbzService: DbzService
+    ){}
+
+```
