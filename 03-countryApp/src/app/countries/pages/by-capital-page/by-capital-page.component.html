@@ -1,1 +1,20 @@
-<p>by-capital-page works!</p>
+<h2>Por capital</h2>
+
+
+<div class="row">
+    <div class="col">
+        <!-- Serchbox -->
+        <shared-searchbox 
+            placeholder="Buscar por capital"
+            (onValue)="searchByCapital($event)"
+            ></shared-searchbox>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <hr>
+        {{'tabla de resultados' | titlecase}}
+    </div>
+</div>
