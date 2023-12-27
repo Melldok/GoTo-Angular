@@ -6,7 +6,7 @@
         <!-- Serchbox -->
         <shared-searchbox 
             placeholder="Buscar por capital"
-            (onValue)="searchByCapital($event)"
+            (onDebounce)="searchByCapital($event)"
             ></shared-searchbox>
     </div>
 </div>
@@ -15,6 +15,9 @@
 <div class="row">
     <div class="col">
         <hr>
-        {{'tabla de resultados' | titlecase}}
+
+        <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+
+        <country-table [countries]="countries"></country-table>
     </div>
 </div>
