@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>Borrar el heroe?</h2>
+<mat-dialog-content>Esto borrara el heroe seleccionado. Este proceso no es reversible</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+
+  <button mat-button [mat-dialog-close]="true">Borrar</button>
+</mat-dialog-actions>
