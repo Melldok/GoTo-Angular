@@ -1,0 +1,24 @@
+
+<app-title title="Defer Views"></app-title>
+
+<section class="grid grid-cols-1">
+
+  <!-- Defer sirve para cargar un componente de manera diferida, es decir, cuando el usuario lo necesite. En este caso, se cargan los componentes de manera diferida y se muestra un placeholder mientras se cargan. -->
+  @defer () {
+  <app-heavy-loaders-slow cssClass="bg-blue-500"></app-heavy-loaders-slow>
+  }@placeholder {
+  <h2 class="h-[600px] w-full bg-gray-200 animate-pulse">Cargando</h2>
+  }
+
+  @defer (on viewport) {
+  <app-heavy-loaders-slow cssClass="bg-green-500"></app-heavy-loaders-slow>
+  }@placeholder {
+  <h2 class="h-[600px] w-full bg-gray-200 animate-pulse">Cargando</h2>
+  }
+
+  @defer (on viewport) {
+  <app-heavy-loaders-slow cssClass="bg-purple-500"></app-heavy-loaders-slow>
+  }@placeholder {
+  <h2 class="h-[600px] w-full bg-gray-200 animate-pulse">Cargando</h2>
+  }
+</section>
