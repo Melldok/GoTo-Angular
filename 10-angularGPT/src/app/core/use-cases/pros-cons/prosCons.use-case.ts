@@ -1,12 +1,12 @@
-
 import { environment } from '../../../../environments/environment';
-import { OrthographyResponse } from '../../../interfaces/orthrography.respone';
+import { prosConsResponse } from '../../../interfaces/pros-cons.response';
 
 
-export const orthographyUseCase = async ( prompt:string ) => {
+
+export const prosConsUseCase = async ( prompt:string ) => {
 
   try {
-    const resp = await fetch(`${environment.backendApi}/orthography-check`, {
+    const resp = await fetch(`${environment.backendApi}/pros-cons-discusser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export const orthographyUseCase = async ( prompt:string ) => {
 
     if ( !resp.ok ) throw new Error('No se pudo realizar la corrección');
 
-    const data = await resp.json() as OrthographyResponse;
+    const data = await resp.json() as prosConsResponse;
 
     return {
       ok: true,
@@ -26,10 +26,7 @@ export const orthographyUseCase = async ( prompt:string ) => {
   } catch (error) {
     console.log(error);
     return {
-      ok: false,
-      userScore: 0,
-      errors: [],
-      message: 'No se pudo realizar la corrección'
+      content: 'No se pudo realizar la corrección'
     }
   }
 
